@@ -1,4 +1,4 @@
-const email = "hello@raquelquiros.com";
+const email = "raquidel27@gmail.com";
 
 export default function Footer() {
   return (

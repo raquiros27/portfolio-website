@@ -57,8 +57,8 @@ export default function Contact() {
               Open to freelance, collaborations, and full-time opportunities.
             </p>
 
-            <a href="mailto:hello@raquelquiros.com" className="contact-link">
-              hello@raquelquiros.com
+            <a href="mailto:raquidel27@gmail.com" className="contact-link">
+              raquidel27@gmail.com
             </a>
 
             <div className="contact-meta">
