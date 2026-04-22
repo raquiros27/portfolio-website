@@ -43,14 +43,14 @@ interface Project {
 const brandIdentityProjects: Project[] = [
   {
     title: "Huertos Marinos",
-    subtitle: "Brand Identity & Packaging System",
+    subtitle: "Brand Identity & Full Design System",
     description:
       "A premium brand identity and packaging system for an oyster-focused aquaculture business, positioning the product for high-end restaurants, hotels, and conscious consumers.",
     category: "Brand Identity",
     location: "Golfo de Nicoya, Costa Rica",
-    year: "2024",
+    year: "2022",
     industry: "Food & Beverage / Aquaculture",
-    projectType: "Brand Identity, Packaging System, Marketing & Digital Applications",
+    projectType: "Brand Identity, Social Media Managment, Marketing & UI/UX",
     role: "Lead Designer & Strategist",
     tags: ["Brand Identity", "UI/UX", "Marketing", "Social Media"],
     tools: [
@@ -116,7 +116,7 @@ const seasonalIllustrationProjects: Project[] = [
       "Illustrated seasonal pattern systems developed for Lush's gift designs, combining handcrafted techniques, storytelling, and scalable production thinking.",
     category: "Digital and Traditional Illustration Designs",
     location: "Lush Talent Pool",
-    year: "2026",
+    year: "2025",
     projectType: "Digital and Traditional Illustration Designs",
     role: "Illustrator & Pattern Designer",
     tags: ["Vector Illustration", "Pattern Design", "Packaging", "Gouache", "Christmas"],
@@ -129,7 +129,7 @@ const seasonalIllustrationProjects: Project[] = [
     description:
       "An invitation designed as both artwork and announcement, translating atmosphere, emotion, and story into a physical object.",
     category: "Digital and Traditional Illustration Designs",
-    year: "2025",
+    year: "2023",
     projectType: "Illustration & Print, Invitation Design",
     role: "Illustrator & Designer",
     tags: ["Illustration", "Watercolour", "Invitation", "Print"],

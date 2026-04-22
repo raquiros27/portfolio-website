@@ -44,7 +44,7 @@ export default function WeddingInvitationProcessSection({ metadata }: { metadata
       style={{ backgroundColor: "transparent" }}
     >
       {/* Title */}
-      <div className="mb-8">
+      <div className="mb-8 text-center">
         <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-semibold tracking-tight text-white mb-2 leading-tight">
           Wedding Invitation
         </h1>

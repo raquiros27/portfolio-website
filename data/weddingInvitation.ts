@@ -3,7 +3,7 @@ import type { CaseStudyProject } from "@/components/types";
 export const weddingInvitationData: CaseStudyProject = {
   title: "Wedding Invitation",
   subtitle: "Bespoke Watercolour & Illustration Invitation Design",
-  year: "2025",
+  year: "2023",
   role: "Illustrator & Designer",
   projectType: "Illustration & Print, Invitation Design",
   designDecisions:

@@ -128,6 +128,7 @@ export default function UrnaLayout({ project }: UrnaLayoutProps) {
           </div>
           <SnapshotRow
             items={[
+              { label: "Year", value: "2025" },
               { label: "Audience", value: "Kids · Women's workshops (future-ready)" },
               { label: "Tone", value: "Warm · playful · calm · trustworthy" },
               { label: "Goal", value: "Belonging, expression, and community visibility" },

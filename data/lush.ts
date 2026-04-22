@@ -3,7 +3,7 @@ import type { CaseStudyProject } from "@/components/types";
 export const lushSeasonalData: CaseStudyProject = {
   title: "LUSH Seasonal Pattern Design",
   subtitle: "Halloween & Christmas 2026,  Talent Pool Selection",
-  year: "2026",
+  year: "2025",
   location: "Lush Talent Pool",
   role: "Illustrator & Pattern Designer",
   projectType: "Seasonal Illustration & Pattern Systems Design",
