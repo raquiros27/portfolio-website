@@ -12,7 +12,11 @@ export default function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
+    const subject = encodeURIComponent(`Portfolio inquiry from ${formData.name}`);
+    const body = encodeURIComponent(
+      `Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`
+    );
+    window.location.href = `mailto:raquidel27@gmail.com?subject=${subject}&body=${body}`;
   };
 
   const handleChange = (
@@ -60,6 +64,10 @@ export default function Contact() {
             <a href="mailto:raquidel27@gmail.com" className="contact-link">
               raquidel27@gmail.com
             </a>
+            <a href="mailto:raquidel27@gmail.com" className="contact-primary-cta">
+              Email me directly
+            </a>
+            <p className="contact-response-time">Typical response time: within 24 hours.</p>
 
             <div className="contact-meta">
               <span>Leeds, UK</span>

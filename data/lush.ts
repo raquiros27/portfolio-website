@@ -1,7 +1,7 @@
 import type { CaseStudyProject } from "@/components/types";
 
 export const lushSeasonalData: CaseStudyProject = {
-  title: "Lush Seasonal Pattern Design",
+  title: "LUSH Seasonal Pattern Design",
   subtitle: "Halloween & Christmas 2026,  Talent Pool Selection",
   year: "2026",
   location: "Lush Talent Pool",

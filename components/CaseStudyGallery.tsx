@@ -35,10 +35,6 @@ export default function CaseStudyGallery({ images }: CaseStudyGalleryProps) {
                   alt={image.alt}
                   className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"
                   loading="lazy"
-                  onError={(e) => {
-                    console.error('Image failed to load:', image.src);
-                    (e.target as HTMLImageElement).style.display = 'none';
-                  }}
                 />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
               </div>

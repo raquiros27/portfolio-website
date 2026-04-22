@@ -10,11 +10,13 @@ interface LushLayoutProps {
 
 function Figure({
   src,
+  alt,
   caption,
   imgClassName,
   imgStyle,
 }: {
   src: string;
+  alt: string;
   caption: string;
   imgClassName?: string;
   imgStyle?: React.CSSProperties;
@@ -29,7 +31,7 @@ function Figure({
     >
       <img
         src={src}
-        alt=""
+        alt={alt}
         className={imgClassName ?? "w-full h-auto block rounded-[22px] border border-white/20 shadow-lg"}
         style={imgStyle ?? { boxShadow: "0 10px 28px rgba(0,0,0,0.25)" }}
       />
@@ -42,10 +44,12 @@ function Figure({
 
 function VideoFigure({
   src,
+  ariaLabel,
   caption,
   trimTopBottomPx,
 }: {
   src: string;
+  ariaLabel: string;
   caption: string;
   trimTopBottomPx?: number;
 }) {
@@ -60,6 +64,7 @@ function VideoFigure({
     >
       <video
         src={src}
+        aria-label={ariaLabel}
         className="w-full h-auto block rounded-[22px] border border-white/20 bg-black"
         style={{
           boxShadow: "0 10px 28px rgba(0,0,0,0.25)",
@@ -85,13 +90,15 @@ export default function LushLayout({ project }: LushLayoutProps) {
   return (
     <main className="relative w-full" style={{ backgroundColor: "transparent" }}>
       {/* HERO */}
-      <section className="-mx-4 -mt-4 w-full mb-8 md:mb-12 md:-mx-6 md:-mt-6">
-        <Figure
-          src={`${base}/lush-wrappingpaper-christmas-mockup.png`}
-          caption=""
-          imgClassName="w-full h-auto block rounded-none border-0"
-          imgStyle={undefined}
-        />
+      <section className="w-full mb-8 md:mb-12">
+        <div className="relative w-full h-[38vh] md:h-[56vh] overflow-hidden">
+          <img
+            src={`${base}/lush-wrappingpaper-christmas-mockup.png`}
+            alt="LUSH seasonal wrapping paper hero mockup"
+            className="absolute inset-0 w-full h-full object-cover object-center rounded-none border-0"
+            loading="eager"
+          />
+        </div>
       </section>
 
       {/* PROJECT TITLE & METADATA,  same as CP/HM */}
@@ -186,7 +193,7 @@ export default function LushLayout({ project }: LushLayoutProps) {
           >
             <img
               src={`${base}/lush-witchy-single-elements.png`}
-              alt=""
+              alt="LUSH Halloween illustrated element library"
               className="w-full h-auto block rounded-[22px] border border-white/20"
               style={{ boxShadow: "0 10px 28px rgba(0,0,0,0.25)" }}
             />
@@ -208,6 +215,7 @@ export default function LushLayout({ project }: LushLayoutProps) {
             >
               <video
                 src={`${base}/Halloween-comp.mp4`}
+                aria-label="Animated composition of LUSH Halloween pattern elements"
                 className="absolute inset-0 w-full h-full object-cover"
                 style={{ objectFit: "cover" }}
                 autoPlay
@@ -227,6 +235,7 @@ export default function LushLayout({ project }: LushLayoutProps) {
         <div className="max-w-[1200px] mx-auto">
           <Figure
             src={`${base}/witchy-print-wrap.png`}
+            alt="LUSH Halloween gift wrap pattern applied to a mockup"
             caption="Primary seamless pattern developed for official Halloween gift wrap."
           />
         </div>
@@ -236,10 +245,12 @@ export default function LushLayout({ project }: LushLayoutProps) {
         <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
           <Figure
             src={`${base}/witchy-print-wrap-V2.png`}
+            alt="LUSH Halloween gift wrap colour variation in alternative palette"
             caption="Colour variation,  alternative palette for seasonal versatility."
           />
           <Figure
             src={`${base}/witchy-print-wrap-V3.png`}
+            alt="LUSH Halloween gift wrap secondary colour variation"
             caption="Colour variation,  secondary tone exploration for dynamic application."
           />
         </div>
@@ -249,6 +260,7 @@ export default function LushLayout({ project }: LushLayoutProps) {
         <div className="max-w-[1200px] mx-auto">
           <Figure
             src={`${base}/witchy-final-gift-box.png`}
+            alt="LUSH Halloween illustrated pattern applied to seasonal gift packaging"
             caption="Final mockup demonstrating real-world application on seasonal gift packaging."
           />
         </div>
@@ -269,7 +281,7 @@ export default function LushLayout({ project }: LushLayoutProps) {
             </h2>
             <p className="text-base text-white/90 leading-relaxed">
               Individually hand-painted in gouache, then digitised into a cohesive pattern
-              system—retaining the softness and imperfection of the medium while supporting
+              system, retaining the softness and imperfection of the medium while supporting
               consistent use across packaging.
             </p>
           </div>
@@ -287,7 +299,7 @@ export default function LushLayout({ project }: LushLayoutProps) {
           >
             <img
               src={`${base}/christmas-single-elements.png`}
-              alt=""
+              alt="LUSH Christmas illustrated element system derived from gouache artwork"
               className="w-full h-auto block rounded-[22px] border border-white/20"
               style={{ boxShadow: "0 10px 28px rgba(0,0,0,0.25)" }}
             />
@@ -309,6 +321,7 @@ export default function LushLayout({ project }: LushLayoutProps) {
             >
               <video
                 src={`${base}/christmas-comp.mp4`}
+                aria-label="Animated composition of LUSH Christmas pattern elements"
                 className="absolute inset-0 w-full h-full object-cover"
                 style={{ objectFit: "cover" }}
                 autoPlay
@@ -325,6 +338,7 @@ export default function LushLayout({ project }: LushLayoutProps) {
         <div className="max-w-[1200px] mx-auto">
           <Figure
             src={`${base}/christmas-print-wrap.png`}
+            alt="LUSH Christmas hand-painted wrap pattern showcased as final print"
             caption="Primary Christmas gift wrap pattern preserving hand-painted warmth at scale."
           />
         </div>
@@ -372,6 +386,7 @@ export default function LushLayout({ project }: LushLayoutProps) {
         <div className="max-w-[1200px] mx-auto">
           <Figure
             src={`${base}/christmas-final-gift-box.png`}
+            alt="LUSH Christmas pattern applied to final gift packaging mockup"
             caption="Final gift mockup showing the Christmas wrap applied to seasonal packaging."
           />
 

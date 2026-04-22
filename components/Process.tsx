@@ -1,8 +1,8 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { useInView } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 import AmbientBackdrop from "./AmbientBackdrop";
 import SectionAccentLine from "./SectionAccentLine";
 
@@ -55,10 +55,23 @@ export default function Process() {
   const [carouselOpen, setCarouselOpen] = useState(false);
   const [carouselStepIndex, setCarouselStepIndex] = useState<number | null>(null);
   const [carouselIndex, setCarouselIndex] = useState(0);
+  const [carouselDirection, setCarouselDirection] = useState(1);
+  const shouldReduceMotion = useReducedMotion();
 
   const carouselImages = carouselStepIndex !== null && processSteps[carouselStepIndex].seeMoreImages
     ? processSteps[carouselStepIndex].seeMoreImages
     : [];
+
+  const paginateCarousel = useCallback((nextDirection: 1 | -1) => {
+    if (carouselImages.length <= 1) return;
+    setCarouselDirection(nextDirection);
+    setCarouselIndex((prev) => {
+      if (nextDirection === -1) {
+        return prev > 0 ? prev - 1 : carouselImages.length - 1;
+      }
+      return prev < carouselImages.length - 1 ? prev + 1 : 0;
+    });
+  }, [carouselImages.length]);
 
   useEffect(() => {
     if (carouselOpen) document.body.style.overflow = "hidden";
@@ -72,10 +85,12 @@ export default function Process() {
     if (!carouselOpen) return;
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setCarouselOpen(false);
+      if (e.key === "ArrowLeft") paginateCarousel(-1);
+      if (e.key === "ArrowRight") paginateCarousel(1);
     };
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
-  }, [carouselOpen]);
+  }, [carouselOpen, paginateCarousel]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -140,6 +155,7 @@ export default function Process() {
                   if (!hasCarousel) return;
                   setCarouselStepIndex(index);
                   setCarouselIndex(0);
+                  setCarouselDirection(1);
                   setCarouselOpen(true);
                 };
 
@@ -147,7 +163,7 @@ export default function Process() {
               <motion.div
                 key={index}
                 variants={itemVariants}
-                className={`group relative min-h-[18rem] rounded-2xl border border-ink/12 bg-cream/70 py-8 px-8 shadow-sm backdrop-blur-sm transition-all duration-300 hover:border-terracotta/30 md:min-h-[19.5rem] ${hasCarousel ? "cursor-pointer" : "cursor-default"}`}
+                className={`group relative min-h-[18rem] rounded-2xl border border-ink/12 bg-cream/70 py-8 px-8 shadow-sm backdrop-blur-sm transition-all duration-300 hover:border-terracotta/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta/70 focus-visible:ring-offset-2 focus-visible:ring-offset-paper md:min-h-[19.5rem] ${hasCarousel ? "cursor-pointer" : "cursor-default"}`}
                 role={hasCarousel ? "button" : undefined}
                 tabIndex={hasCarousel ? 0 : undefined}
                 onClick={hasCarousel ? openCarousel : undefined}
@@ -161,7 +177,7 @@ export default function Process() {
                       }
                     : undefined
                 }
-                whileHover={{ y: -4 }}
+                whileHover={shouldReduceMotion ? undefined : { y: -4, scale: 1.005 }}
               >
                 {/* Big number in corner */}
                 <div
@@ -217,23 +233,23 @@ export default function Process() {
       <AnimatePresence>
         {carouselOpen && (
           <motion.div
-            initial={{ opacity: 0 }}
+            initial={shouldReduceMotion ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            exit={shouldReduceMotion ? undefined : { opacity: 0 }}
             className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4"
             onClick={() => { setCarouselOpen(false); setCarouselStepIndex(null); }}
           >
             <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
+              initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
+              exit={shouldReduceMotion ? undefined : { opacity: 0, scale: 0.95 }}
               className="relative w-full max-w-4xl rounded-2xl border border-ink/12 bg-paper p-6 shadow-xl md:p-8"
               onClick={(e) => e.stopPropagation()}
             >
               <button
                 type="button"
                 onClick={() => { setCarouselOpen(false); setCarouselStepIndex(null); }}
-                className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-paper/90 hover:bg-creamDeep border border-ink/12 text-ink transition-colors"
+                className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-paper/90 hover:bg-creamDeep border border-ink/12 text-ink transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta/70 focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
                 aria-label="Close"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -241,14 +257,53 @@ export default function Process() {
                 </svg>
               </button>
 
+              {carouselImages.length > 1 && (
+                <>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      paginateCarousel(-1);
+                    }}
+                    className="absolute left-4 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-ink/12 bg-paper/90 text-ink transition-colors hover:bg-creamDeep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta/70 focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
+                    aria-label="Previous image"
+                  >
+                    <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      paginateCarousel(1);
+                    }}
+                    className="absolute right-4 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-ink/12 bg-paper/90 text-ink transition-colors hover:bg-creamDeep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta/70 focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
+                    aria-label="Next image"
+                  >
+                    <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </button>
+                </>
+              )}
+
               <div className="relative flex items-center justify-center min-h-[280px] md:min-h-[360px]">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={carouselIndex}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.25 }}
+                    initial={
+                      shouldReduceMotion
+                        ? false
+                        : { opacity: 0, x: carouselDirection * 40, scale: 0.985 }
+                    }
+                    animate={{ opacity: 1, x: 0, scale: 1 }}
+                    exit={
+                      shouldReduceMotion
+                        ? undefined
+                        : { opacity: 0, x: carouselDirection * -40, scale: 0.985 }
+                    }
+                    transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
                     className="flex justify-center items-center w-full"
                   >
                     <img

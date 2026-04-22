@@ -1,6 +1,6 @@
 "use client";
 
-/** Slim quote band between hero and projects — static markup so copy always paints (no opacity animation). */
+/** Slim quote band between hero and projects , static markup so copy always paints (no opacity animation). */
 export default function DianaSantosQuote() {
   return (
     <section

@@ -2,7 +2,8 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    unoptimized: true, // Allow unoptimized images for local development
+    // Keep fast local iteration while allowing optimized delivery in production.
+    unoptimized: process.env.NODE_ENV !== "production",
   },
 };
 

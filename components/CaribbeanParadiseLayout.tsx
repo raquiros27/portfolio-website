@@ -112,25 +112,19 @@ export default function CaribbeanParadiseLayout({ project }: CaribbeanParadiseLa
   return (
     <div className="relative" style={{ backgroundColor: 'transparent' }}>
       {/* Hero Image - Brand Guidelines */}
-      <section className="-mx-4 -mt-4 w-full overflow-hidden md:-mx-6 md:-mt-6">
+      <section className="w-full overflow-hidden">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="flex justify-center"
+          className="relative w-full h-[40vh] md:h-[56vh] overflow-hidden"
         >
-          <div className="w-full">
-            <img
-              src="/projects/caribbean-paradise/cp-brand-guidelines.jpg"
-              alt="Caribbean Paradise brand guidelines"
-              className="w-full h-auto"
-              style={{ 
-                marginTop: '-10%',
-                display: 'block'
-              }}
-              loading="eager"
-            />
-          </div>
+          <img
+            src="/projects/caribbean-paradise/cp-brand-guidelines.jpg"
+            alt="Caribbean Paradise brand guidelines"
+            className="absolute inset-0 w-full h-full object-cover object-center"
+            loading="eager"
+          />
         </motion.div>
       </section>
 
@@ -197,7 +191,7 @@ export default function CaribbeanParadiseLayout({ project }: CaribbeanParadiseLa
           </p>
           <p className="mt-4">
             The challenge was to translate this richness into a visual identity that feels vibrant
-            and intentional—capturing its essence while balancing warmth, clarity, and structure
+            and intentional, capturing its essence while balancing warmth, clarity, and structure
             across diverse applications.
           </p>
         </motion.div>
@@ -213,8 +207,8 @@ export default function CaribbeanParadiseLayout({ project }: CaribbeanParadiseLa
             transition={{ duration: 0.6 }}
             className="max-w-6xl mx-auto"
           >
-            <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-start">
-              <div className="backdrop-blur-md bg-white/10 rounded-2xl p-6 md:p-8 border border-white/20">
+            <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-stretch">
+              <div className="backdrop-blur-md bg-white/10 rounded-2xl p-6 md:p-8 border border-white/20 h-full">
                 <h2 className="font-display text-3xl md:text-4xl font-semibold italic text-white mb-4">
                   Challenge
                 </h2>
@@ -222,17 +216,17 @@ export default function CaribbeanParadiseLayout({ project }: CaribbeanParadiseLa
                   {project.challenge}
                 </p>
               </div>
-              <div className="w-full flex flex-col">
-                <div className="w-full max-w-md mx-auto">
+              <div className="backdrop-blur-md bg-white/10 rounded-2xl p-6 md:p-8 border border-white/20 h-full flex flex-col">
+                <div className="w-full flex-1 flex items-center justify-center">
                   <img
                     src="/projects/caribbean-paradise/cp-logo-primary.jpg"
                     alt="Logo symbolising sanctuary and biodiversity"
-                    className="w-full h-auto"
+                    className="w-full h-full max-h-[420px] object-contain"
                     loading="lazy"
                   />
                 </div>
                 <p className="text-white/70 text-sm mt-4 text-left">
-                  Logo symbolising sanctuary and biodiversity,  a turtle carrying a paradise within its shell.
+                  Logo symbolising sanctuary and biodiversity, a turtle carrying a paradise within its shell.
                 </p>
               </div>
             </div>
@@ -275,7 +269,7 @@ export default function CaribbeanParadiseLayout({ project }: CaribbeanParadiseLa
         </section>
       )}
 
-      {/* Visual bridge — between Project Goal and Design & Identity */}
+      {/* Visual bridge , between Project Goal and Design & Identity */}
       <section className="container mx-auto px-6 mb-8 md:mb-12">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -356,7 +350,7 @@ export default function CaribbeanParadiseLayout({ project }: CaribbeanParadiseLa
                 src: "/projects/caribbean-paradise/cp-illustrated-map-final.jpg",
                 alt: "Final illustrated map for guest wayfinding and brand storytelling",
                 caption:
-                  "Final illustrated map designed as a cohesive brand system—communicating space, experience, and identity at a glance.",
+                  "Final illustrated map designed as a cohesive brand system, communicating space, experience, and identity at a glance.",
               },
               {
                 src: "/projects/caribbean-paradise/cp-map-illustration.jpg",
@@ -375,7 +369,7 @@ export default function CaribbeanParadiseLayout({ project }: CaribbeanParadiseLa
         </motion.div>
       </section>
 
-      {/* Impact — imagery first, Impact card beneath */}
+      {/* Impact , imagery first, Impact card beneath */}
       {project.results && (
         <section className="container mx-auto px-6 mb-16 md:mb-24">
           <motion.div
@@ -402,7 +396,7 @@ export default function CaribbeanParadiseLayout({ project }: CaribbeanParadiseLa
                 />
               </div>
 
-              {/* Impact — full width beneath imagery */}
+              {/* Impact , full width beneath imagery */}
               <div className="backdrop-blur-md bg-white/10 rounded-2xl p-6 md:p-8 border border-white/20">
                 <h2 className="font-display text-3xl md:text-4xl font-semibold italic text-white mb-6">
                   Impact
@@ -424,8 +418,8 @@ export default function CaribbeanParadiseLayout({ project }: CaribbeanParadiseLa
           className="max-w-[720px] mx-auto"
         >
           <p className="text-lg md:text-xl font-light italic text-white/90 leading-relaxed">
-            This project for Caribbean Paradise brought clarity and cohesion to a place already rich in character—allowing its
-            identity to be recognised, understood, and remembered. Revealing what was already there—shaping a brand that feels
+            This project for Caribbean Paradise brought clarity and cohesion to a place already rich in character, allowing its
+            identity to be recognised, understood, and remembered. Revealing what was already there, shaping a brand that feels
             as immersive and alive as the place itself.
           </p>
         </motion.div>

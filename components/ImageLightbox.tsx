@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useCallback, useEffect, useState } from "react";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { CaseStudyImage } from "./CaseStudyLayout";
 
 interface ImageLightboxProps {
@@ -16,15 +16,27 @@ export default function ImageLightbox({
   onClose,
 }: ImageLightboxProps) {
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
+  const [direction, setDirection] = useState(1);
+  const shouldReduceMotion = useReducedMotion();
+
+  const paginate = useCallback((nextDirection: 1 | -1) => {
+    setDirection(nextDirection);
+    setCurrentIndex((prev) => {
+      if (nextDirection === -1) {
+        return prev > 0 ? prev - 1 : images.length - 1;
+      }
+      return prev < images.length - 1 ? prev + 1 : 0;
+    });
+  }, [images.length]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         onClose();
       } else if (e.key === "ArrowLeft") {
-        setCurrentIndex((prev) => (prev > 0 ? prev - 1 : images.length - 1));
+        paginate(-1);
       } else if (e.key === "ArrowRight") {
-        setCurrentIndex((prev) => (prev < images.length - 1 ? prev + 1 : 0));
+        paginate(1);
       }
     };
 
@@ -35,15 +47,15 @@ export default function ImageLightbox({
       window.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = "unset";
     };
-  }, [images.length, onClose]);
+  }, [onClose, paginate]);
 
   const currentImage = images[currentIndex];
 
   return (
     <motion.div
-      initial={{ opacity: 0 }}
+      initial={shouldReduceMotion ? false : { opacity: 0 }}
       animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
+      exit={shouldReduceMotion ? undefined : { opacity: 0 }}
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-md"
       onClick={onClose}
     >
@@ -53,7 +65,7 @@ export default function ImageLightbox({
           e.stopPropagation();
           onClose();
         }}
-        className="absolute top-4 right-4 md:top-8 md:right-8 z-10 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white transition-colors"
+        className="absolute top-4 right-4 md:top-8 md:right-8 z-10 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta/80 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
         aria-label="Close lightbox"
       >
         <svg
@@ -77,9 +89,9 @@ export default function ImageLightbox({
           <button
             onClick={(e) => {
               e.stopPropagation();
-              setCurrentIndex((prev) => (prev > 0 ? prev - 1 : images.length - 1));
+              paginate(-1);
             }}
-            className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white transition-colors"
+            className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta/80 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
             aria-label="Previous image"
           >
             <svg
@@ -99,9 +111,9 @@ export default function ImageLightbox({
           <button
             onClick={(e) => {
               e.stopPropagation();
-              setCurrentIndex((prev) => (prev < images.length - 1 ? prev + 1 : 0));
+              paginate(1);
             }}
-            className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white transition-colors"
+            className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta/80 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
             aria-label="Next image"
           >
             <svg
@@ -129,20 +141,24 @@ export default function ImageLightbox({
         <AnimatePresence mode="wait">
           <motion.div
             key={currentIndex}
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            transition={{ duration: 0.3 }}
+            initial={
+              shouldReduceMotion
+                ? false
+                : { opacity: 0, x: direction * 44, scale: 0.985 }
+            }
+            animate={{ opacity: 1, x: 0, scale: 1 }}
+            exit={
+              shouldReduceMotion
+                ? undefined
+                : { opacity: 0, x: direction * -44, scale: 0.985 }
+            }
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
             className="relative w-full h-full"
           >
             <img
               src={currentImage.src}
               alt={currentImage.alt}
               className="w-full h-auto max-h-[90vh] object-contain rounded-lg"
-              onError={(e) => {
-                console.error('Image failed to load:', currentImage.src);
-                (e.target as HTMLImageElement).style.display = 'none';
-              }}
             />
             {(currentImage.caption || images.length > 1) && (
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 md:p-6 rounded-b-lg">

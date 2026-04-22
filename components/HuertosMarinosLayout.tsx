@@ -90,14 +90,20 @@ function SectionHeading({
 export default function HuertosMarinosLayout({ project }: HuertosMarinosLayoutProps) {
   return (
     <div className="relative" style={{ backgroundColor: "transparent" }}>
-      <section className="-mx-4 -mt-4 w-full md:-mx-6 md:-mt-6 mb-8 md:mb-12">
-        <Figure
-          src="/projects/huertos-marinos/hm-logo-primary.png"
-          alt="Huertos Marinos primary logo lockup"
-          priority
-          imgClassName="w-full h-auto rounded-none border-0"
-          imgStyle={undefined}
-        />
+      <section className="w-full mb-8 md:mb-12">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.7 }}
+          className="relative w-full h-[38vh] md:h-[56vh] overflow-hidden"
+        >
+          <img
+            src="/projects/huertos-marinos/hm-logo-primary-hero.png"
+            alt="Huertos Marinos primary logo lockup"
+            className="absolute inset-0 w-full h-full object-cover object-center rounded-none border-0"
+            loading="eager"
+          />
+        </motion.div>
       </section>
 
       <section className="container mx-auto px-6 mb-16 md:mb-24">
@@ -157,7 +163,7 @@ export default function HuertosMarinosLayout({ project }: HuertosMarinosLayoutPr
           </p>
           <p className="mt-4">
             The challenge was to create a brand that felt both grounded in its origin and elevated
-            enough to resonate within a more refined market—aligning its natural roots with a
+            enough to resonate within a more refined market, aligning its natural roots with a
             sense of care, craftsmanship, and strategic positioning.
           </p>
         </motion.div>
@@ -212,7 +218,7 @@ export default function HuertosMarinosLayout({ project }: HuertosMarinosLayoutPr
       <section className="container mx-auto px-6 mb-12 md:mb-16">
         <SectionHeading title="Social Media Presence">
           <p className="mb-8">
-            Social presence designed as an extension of the brand system—shaping perception,
+            Social presence designed as an extension of the brand system, shaping perception,
             building trust, and communicating product value with clarity and consistency across
             platforms.
           </p>
@@ -222,7 +228,7 @@ export default function HuertosMarinosLayout({ project }: HuertosMarinosLayoutPr
           <Figure
             src="/projects/huertos-marinos/hm-social-mockup.png"
             alt="Instagram profile / feed mockup"
-            caption="Instagram feed designed to signal quality instantly—supporting both B2B credibility and B2C connection."
+            caption="Instagram feed designed to signal quality instantly, supporting both B2B credibility and B2C connection."
           />
         </div>
       </section>
@@ -230,7 +236,7 @@ export default function HuertosMarinosLayout({ project }: HuertosMarinosLayoutPr
       <section className="container mx-auto px-6 mb-12 md:mb-16">
         <SectionHeading title="Sales & Positioning">
           <p className="mb-8">
-            Sales collateral designed as a strategic tool for high-end positioning—clearly
+            Sales collateral designed as a strategic tool for high-end positioning, clearly
             communicating product quality, traceability, and credibility to chefs, premium
             restaurants, and hospitality buyers.
           </p>
@@ -240,7 +246,7 @@ export default function HuertosMarinosLayout({ project }: HuertosMarinosLayoutPr
           className="mt-8"
           src="/projects/huertos-marinos/hm-b2b-brochure-mockup.png"
           alt="B2B tri-fold brochure mockup"
-          caption="B2B brochure designed to communicate origin, quality, and trust—supporting confident purchasing decisions in a premium market."
+          caption="B2B brochure designed to communicate origin, quality, and trust, supporting confident purchasing decisions in a premium market."
         />
       </section>
 
@@ -248,7 +254,7 @@ export default function HuertosMarinosLayout({ project }: HuertosMarinosLayoutPr
         <SectionHeading title="Storytelling">
           <p className="mb-8">
             Large-scale visual storytelling designed to translate production and sustainability
-            into a clear, engaging narrative—supporting understanding, trust, and brand
+            into a clear, engaging narrative, supporting understanding, trust, and brand
             transparency in physical spaces.
           </p>
         </SectionHeading>
@@ -264,7 +270,7 @@ export default function HuertosMarinosLayout({ project }: HuertosMarinosLayoutPr
       <section className="container mx-auto px-6 mb-12 md:mb-16">
         <SectionHeading title="Digital">
           <p className="mb-8">
-            Full website design and development—translating the brand into a digital experience
+            Full website design and development, translating the brand into a digital experience
             that communicates quality, builds trust, and supports conversion in a premium market
             with clarity and intention.
           </p>
@@ -315,7 +321,7 @@ export default function HuertosMarinosLayout({ project }: HuertosMarinosLayoutPr
                 <li className="flex items-start">
                   <span className="mr-3 text-white/60 mt-1">•</span>
                   <span>
-                    Built a cohesive system across packaging, digital, and marketing—ensuring
+                    Built a cohesive system across packaging, digital, and marketing, ensuring
                     consistency at every touchpoint
                   </span>
                 </li>

@@ -1,7 +1,6 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
-import { useInView } from "framer-motion";
+import { motion, AnimatePresence, useInView, useReducedMotion } from "framer-motion";
 import { useRef } from "react";
 import AmbientBackdrop from "./AmbientBackdrop";
 
@@ -151,6 +150,7 @@ const keySkillsSections = [
 export default function Experience() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const shouldReduceMotion = useReducedMotion();
   // Key Skills is temporarily hidden, but we keep these stubs so the block can be
   // re-enabled later without reintroducing build/type errors.
   const hoveredSkill: string | null = null;
@@ -162,24 +162,24 @@ export default function Experience() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
+        staggerChildren: 0.08,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, x: -30 },
+    hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      x: 0,
       transition: {
-        duration: 0.6,
+        duration: 0.45,
+        ease: [0.22, 1, 0.36, 1],
       },
     },
   };
 
   return (
-    <section className="relative overflow-hidden bg-cream px-6 pt-12 pb-14 md:pt-14 md:pb-16">
+    <section className="relative overflow-hidden bg-cream px-6 pt-20 pb-14 md:pt-24 md:pb-16">
       <AmbientBackdrop variant="cream" />
       <div
         id="experience"
@@ -340,6 +340,9 @@ export default function Experience() {
                 transition={{ duration: 0.6 }}
                 className="max-w-2xl"
               >
+                <p className="mb-3 text-xs font-medium uppercase tracking-[0.3em] text-terracotta">
+                  Through the years
+                </p>
                 <h2 className="font-display text-4xl font-medium tracking-tight text-ink md:text-5xl lg:text-6xl">
                   Experience
                 </h2>
@@ -357,7 +360,7 @@ export default function Experience() {
 
         {/* Timeline */}
         <div className="relative mx-auto max-w-4xl">
-          {/* Spine (no circles) — between years and cards */}
+          {/* Spine (no circles), between years and cards */}
           <div
             className="pointer-events-none absolute top-0 hidden h-full w-px bg-ink/10 md:block left-[calc(7.5rem+0.75rem)]"
             aria-hidden
@@ -365,12 +368,17 @@ export default function Experience() {
 
           <motion.div
             variants={containerVariants}
-            initial="visible"
-            animate="visible"
+            initial={shouldReduceMotion ? "visible" : "hidden"}
+            animate={isInView ? "visible" : "hidden"}
             className="space-y-6 md:space-y-8"
           >
             {experiences.map((exp, idx) => (
-              <motion.div key={idx} variants={itemVariants}>
+              <motion.div
+                key={idx}
+                variants={itemVariants}
+                whileHover={shouldReduceMotion ? undefined : { y: -2 }}
+                transition={{ duration: 0.25 }}
+              >
                 <div className="grid gap-3 md:grid-cols-[7.5rem_1.5rem_1fr] md:items-center md:gap-8">
                   <div className="text-inkFaint md:text-right">
                     <p className="text-xs font-medium uppercase tracking-[0.22em] text-terracottaDeep">
@@ -386,7 +394,10 @@ export default function Experience() {
                     <div className="h-px w-full bg-ink/12" aria-hidden />
                   </div>
 
-                  <div className="group rounded-2xl border border-ink/12 bg-paper/95 px-6 py-4 shadow-sm backdrop-blur-sm transition-transform duration-300 hover:-translate-y-0.5 focus-within:-translate-y-0.5">
+                  <div
+                    className="group rounded-2xl border border-ink/12 bg-paper/95 px-6 py-4 shadow-sm backdrop-blur-sm transition-transform duration-300 hover:-translate-y-0.5 focus-within:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta/70 focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
+                    tabIndex={0}
+                  >
                     <div className="mb-2">
                       <h3 className="text-xl font-bold text-ink">{exp.title}</h3>
                       <p className="text-inkMuted">

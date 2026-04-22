@@ -29,8 +29,8 @@ export default function CaseStudyLayout({ project }: CaseStudyLayoutProps) {
     return <HuertosMarinosLayout project={project} />;
   }
 
-  // Special layout for Lush Seasonal Pattern Design
-  if (project.title === "Lush Seasonal Pattern Design") {
+  // Special layout for LUSH Seasonal Pattern Design
+  if (project.title.toLowerCase() === "lush seasonal pattern design") {
     return <LushLayout project={project} />;
   }
 
@@ -65,10 +65,6 @@ export default function CaseStudyLayout({ project }: CaseStudyLayoutProps) {
               initial={{ scale: 1.1, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              onError={(e) => {
-                console.error('Image failed to load:', heroImage.src);
-                (e.target as HTMLImageElement).style.display = 'none';
-              }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#1e2a4a]/80 via-transparent to-transparent" />
           </div>
@@ -145,7 +141,7 @@ export default function CaseStudyLayout({ project }: CaseStudyLayoutProps) {
                   src: "/projects/caribbean-paradise/cp-illustrated-map-final.jpg",
                   alt: "Final illustrated map for guest wayfinding and brand storytelling",
                   caption:
-                    "Final illustrated map designed as a cohesive brand system—communicating space, experience, and identity at a glance.",
+                    "Final illustrated map designed as a cohesive brand system, communicating space, experience, and identity at a glance.",
                 },
                 {
                   src: "/projects/caribbean-paradise/cp-map-illustration.jpg",

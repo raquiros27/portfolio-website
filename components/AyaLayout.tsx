@@ -66,18 +66,18 @@ function SectionHeading({ title, children }: { title: string; children?: React.R
 export default function AyaLayout(_props: AyaLayoutProps) {
   return (
     <div className="relative" style={{ backgroundColor: "transparent" }}>
-      {/* HERO — full image visible, not trimmed */}
-      <section className="relative -mx-4 -mt-4 w-full mb-12 md:mb-16 md:-mx-6 md:-mt-6">
+      {/* HERO */}
+      <section className="relative w-full mb-12 md:mb-16">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.7 }}
-          className="relative w-full"
+          className="relative w-full h-[38vh] md:h-[56vh] overflow-hidden"
         >
           <img
             src="/projects/aya/water-hero.png"
-            alt="AyA Think of Others — water awareness campaign hero"
-            className="w-full h-auto object-contain"
+            alt="AyA Think of Others , water awareness campaign hero"
+            className="absolute inset-0 w-full h-full object-cover object-center"
             loading="eager"
           />
         </motion.div>
@@ -89,16 +89,47 @@ export default function AyaLayout(_props: AyaLayoutProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="max-w-[720px] mx-auto"
+          className="max-w-[720px] mx-auto text-center"
         >
-          <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight text-white mb-2 leading-tight">
+          <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-semibold tracking-tight text-white mb-4 leading-tight">
             AyA &ldquo;Think of Others&rdquo;
           </h1>
-          <p className="text-xl text-white/90 mb-4">COVID-19 Water Awareness Campaign</p>
-          <p className="text-white/80 text-sm mb-2">
-            Concept Marketing Campaign · Behavioural Change · Public Awareness · Water Company, Costa Rica · 2020
+          <p className="text-xl md:text-2xl text-white/90 mb-8">COVID-19 Water Awareness Campaign</p>
+          <div className="mb-8 flex justify-center">
+            <span className="px-3 py-1.5 text-xs md:text-sm backdrop-blur-md bg-white/10 rounded-full text-white/90 border border-white/20">
+              Concept Marketing Campaign · Behavioural Change · Public Awareness
+            </span>
+          </div>
+          <div className="flex flex-wrap justify-center gap-3 items-center">
+            <span className="px-3 py-1.5 text-xs md:text-sm backdrop-blur-md bg-white/10 rounded-full text-white/90 border border-white/20">
+              <strong>Year:</strong> 2020
+            </span>
+            <span className="px-3 py-1.5 text-xs md:text-sm backdrop-blur-md bg-white/10 rounded-full text-white/90 border border-white/20">
+              <strong>Location:</strong> Costa Rica
+            </span>
+            <span className="px-3 py-1.5 text-xs md:text-sm backdrop-blur-md bg-white/10 rounded-full text-white/90 border border-white/20">
+              <strong>Role:</strong> Concept &amp; Visual Design
+            </span>
+          </div>
+        </motion.div>
+      </section>
+
+      <section className="container mx-auto px-6 mb-8 md:mb-12">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          className="max-w-[720px] mx-auto text-base text-white/90 leading-relaxed text-center"
+        >
+          <p>
+            A public awareness campaign developed during COVID-19 to address the rise in domestic
+            water consumption.
           </p>
-          <p className="text-white/60 text-xs italic">Concept campaign developed for university.</p>
+          <p className="mt-4">
+            The project reframes water waste as a shared human impact, making an invisible issue
+            immediate and emotionally tangible.
+          </p>
         </motion.div>
       </section>
 
@@ -106,80 +137,47 @@ export default function AyaLayout(_props: AyaLayoutProps) {
       <section className="container mx-auto px-6 mb-12 md:mb-16">
         <SectionHeading title="Campaign Objective">
           <p className="mb-4">
-            To prevent an increase in water waste during the COVID-19 pandemic, when hygiene measures significantly raised daily consumption.
-          </p>
-          <p className="mb-4">
-            The campaign focused on adults aged 25–30, encouraging responsible habits by making the consequences of water overuse visible and emotionally immediate.
+            To reduce water waste during COVID-19 by making its consequences visible and emotionally immediate.
           </p>
           <p>
-            Rather than instructing people to simply &ldquo;save water,&rdquo; the objective was to foster empathy, reframing water waste as a shared human impact, where excess in one place directly affects someone else&apos;s access to basic needs.
+            The campaign reframes water use as a shared system, where excess in one place directly limits access elsewhere.
           </p>
         </SectionHeading>
       </section>
 
-      {/* 3) CAMPAIGN GOALS (BULLETS) */}
-      <section className="container mx-auto px-6 mb-12 md:mb-16">
-        <SectionHeading title="Campaign Goals">
-          <ul className="list-disc list-inside space-y-2 text-white/90">
-            <li>Be understood immediately by the general public</li>
-            <li>Encourage behaviour change through empathy, not instruction</li>
-            <li>Translate an invisible consequence into a visible reality</li>
-            <li>Work consistently across multiple mass-reach formats</li>
-            <li>Reach audiences through traditional public media placements</li>
-          </ul>
-        </SectionHeading>
-      </section>
-
-      {/* 4) CORE INSIGHT */}
-      <section className="container mx-auto px-6 mb-12 md:mb-16">
-        <SectionHeading title="Core Insight">
-          <p className="mb-4">
-            People understand the idea of saving water, but they don&apos;t feel the consequence of waste.
-          </p>
-          <p className="mb-4">
-            Because water loss happens invisibly and gradually, it disconnects action from impact.
-          </p>
-          <p className="mb-4">
-            Water waste isn&apos;t just an environmental issue.
-          </p>
-          <p className="mb-4">
-            It is a direct reduction of someone else&apos;s access to essential daily needs.
-          </p>
-          <p>
-            The campaign&apos;s role was to make that relationship visible.
-          </p>
-        </SectionHeading>
-      </section>
-
-      {/* Key visuals image — before Key Visual Concept */}
+      {/* Key visuals image , after Campaign Objective */}
       <section className="container mx-auto px-6 mb-12 md:mb-16">
         <Figure
           src="/projects/aya/water-key-visuals.png"
-          alt="Key visual concept — split-scene composition"
+          alt="Key visual concept , split-scene composition"
           caption=""
         />
       </section>
 
-      {/* 5) KEY VISUAL CONCEPT (TEXT + BULLETS) */}
+      {/* 5) CONCEPT (TEXT + BULLETS) */}
       <section className="container mx-auto px-6 mb-12 md:mb-16">
-        <SectionHeading title="Key Visual Concept">
+        <SectionHeading title="Concept">
           <p className="mb-4">
-            The visual system is built around a split-scene composition connected by a pipe.
+            The campaign is built around a split-scene composition connected by a continuous pipe,
+            transforming an invisible issue into a clear visual narrative.
           </p>
-          <ul className="list-disc list-inside space-y-2 text-white/90">
-            <li>On one side, everyday domestic spaces where water is used excessively</li>
-            <li>On the other, only minimal drops remain, representing essential access elsewhere</li>
-            <li>The pipe acts as a narrative device: cause → effect, instantly readable</li>
-          </ul>
+          <p className="mb-4">
+            One side represents everyday overuse in familiar domestic environments, while the other
+            shows reduced access elsewhere.
+          </p>
+          <p>
+            The pipe acts as a visual connector, establishing a direct and immediate cause-effect
+            relationship.
+          </p>
         </SectionHeading>
       </section>
 
-      {/* 6) IMAGE #1 — immediately after Key Visual Concept */}
+      {/* 6) IMAGE #1 , immediately after Key Visual Concept */}
       <section className="container mx-auto px-6 mb-12 md:mb-16">
         <Figure
           src="/projects/aya/water-spread.png"
-          alt="Editorial magazine spread — water awareness campaign"
-          caption="Editorial magazine spread — the core narrative format."
+          alt="Editorial magazine spread , water awareness campaign"
+          caption="Editorial magazine spread , the core narrative format."
         />
       </section>
 
@@ -187,50 +185,69 @@ export default function AyaLayout(_props: AyaLayoutProps) {
       <section className="container mx-auto px-6 mb-12 md:mb-16">
         <SectionHeading title="Design System & Visual Language">
           <p className="mb-4">
-            Colour contrast separates excess from scarcity.
+            The visual system uses colour contrast to distinguish excess from scarcity.
           </p>
           <p className="mb-4">
-            Warm, saturated tones represent abundance and casual overuse.
-            Cooler, restrained tones represent limitation and essential need.
+            Warm, saturated tones represent abundance and casual overuse, while cooler, restrained
+            tones signal limitation and essential need.
           </p>
           <p className="mb-4">
-            Typography remains clean, direct, and highly legible, ensuring accessibility across a wide demographic.
+            Typography is clean and highly legible, ensuring accessibility across a broad audience.
           </p>
           <p>
-            The composition guides the viewer&apos;s eye through the narrative, allowing the message to be understood without requiring explanation.
+            Compositions are designed for instant readability, allowing the message to be
+            understood at a glance.
           </p>
         </SectionHeading>
       </section>
 
-      {/* 8) IMAGE #2 — immediately after Design System */}
+      {/* 8) IMAGE #2 , immediately after Design System */}
       <section className="container mx-auto px-6 mb-12 md:mb-16">
         <Figure
           src="/projects/aya/water-billboard.png"
-          alt="Billboard — water awareness campaign"
-          caption="Billboard adaptation — distilled for rapid comprehension at distance."
+          alt="Billboard , water awareness campaign"
+          caption="Billboard adaptation , distilled for rapid comprehension at distance."
         />
       </section>
 
       {/* 9) CAMPAIGN APPLICATIONS */}
       <section className="container mx-auto px-6 mb-12 md:mb-16">
-        <SectionHeading title="Campaign Applications">
+        <SectionHeading title="Applications">
           <p className="mb-4">
-            The campaign was developed as a flexible system adapted across multiple public touchpoints:
-            Editorial magazine spread, billboard, and environmental roll-up banner.
+            The campaign was designed as a flexible visual system adaptable across multiple public
+            formats, including editorial spreads, billboards, and environmental placements.
           </p>
           <p>
-            Each format preserves conceptual integrity while adapting to its context and viewing conditions.
+            Each application preserves conceptual clarity while responding to its context, ensuring
+            the message remains immediate and consistent.
           </p>
         </SectionHeading>
       </section>
 
-      {/* 10) IMAGE #3 — immediately after Campaign Applications */}
+      {/* 10) IMAGE #3 , immediately after Campaign Applications */}
       <section className="container mx-auto px-6 mb-12 md:mb-16">
         <Figure
           src="/projects/aya/water-roll-on.png"
-          alt="Roll-up banner — water awareness campaign"
-          caption="Roll-up banner — environmental placement for public and institutional spaces."
+          alt="Roll-up banner , water awareness campaign"
+          caption="Roll-up banner , environmental placement for public and institutional spaces."
         />
+      </section>
+
+      {/* Closing editorial note */}
+      <section className="container mx-auto px-6 mb-16 md:mb-24">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          className="max-w-[720px] mx-auto"
+        >
+          <p className="text-lg md:text-xl font-light italic text-white/90 leading-relaxed">
+            This project reflects how graphic design can be a powerful tool to translate complex
+            social issues into visible, relatable campaigns. It effectively bridges distance
+            between people, making shared impact impossible to ignore.
+          </p>
+        </motion.div>
       </section>
     </div>
   );

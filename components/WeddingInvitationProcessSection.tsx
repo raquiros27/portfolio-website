@@ -1,6 +1,6 @@
 "use client";
 
-// Wedding Invitation — Process strip + narrative
+// Wedding Invitation, Process strip + narrative
 // Files: public/projects/invitation/invite-part1.png, invite-part2.png, invitation-mock-up.png (lowercase)
 
 type MediaItem = {
@@ -8,30 +8,36 @@ type MediaItem = {
   alt: string;
   caption?: string;
 };
+type WeddingMetadata = {
+  year?: string;
+  location?: string;
+  role?: string;
+  projectType?: string;
+};
 
 const slug = "invitation";
 const weddingInviteMedia: MediaItem[] = [
   {
     src: `/projects/${slug}/invite-part1.png`,
-    alt: "Watercolour base wash — siren palette exploration",
+    alt: "Watercolour base wash, siren palette exploration",
     caption:
-      "01 — Hand-painted watercolour base to set mood, palette, and atmosphere.",
+      "01, Hand-painted watercolour base to set mood, palette, and atmosphere.",
   },
   {
     src: `/projects/${slug}/invite-part2.png`,
     alt: "Digital ocean elements added around the watercolour base",
     caption:
-      "02 — Ocean linework added in Procreate: thin, elegant strokes + layered transparencies.",
+      "02, Ocean linework added in Procreate: thin, elegant strokes + layered transparencies.",
   },
   {
     src: `/projects/${slug}/invite-part3-optimized.jpg`,
     alt: "Invite-part3.png",
     caption:
-      "03 — Final invitation: print mock-up showing the finished piece in context.",
+      "03, Final invitation: print mock-up showing the finished piece in context.",
   },
 ];
 
-export default function WeddingInvitationProcessSection() {
+export default function WeddingInvitationProcessSection({ metadata }: { metadata?: WeddingMetadata }) {
   return (
     <section
       className="relative z-10 mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 lg:px-8"
@@ -47,12 +53,41 @@ export default function WeddingInvitationProcessSection() {
         </p>
       </div>
 
+      {metadata && (
+        <div className="mb-8 md:mb-12 text-center">
+          {metadata.projectType && (
+            <div className="mb-5 flex justify-center">
+              <span className="px-3 py-1.5 text-xs md:text-sm backdrop-blur-md bg-white/10 rounded-full text-white/90 border border-white/20">
+                {metadata.projectType}
+              </span>
+            </div>
+          )}
+          <div className="flex flex-wrap justify-center gap-3 items-center">
+            {metadata.year && (
+              <span className="px-3 py-1.5 text-xs md:text-sm backdrop-blur-md bg-white/10 rounded-full text-white/90 border border-white/20">
+                <strong>Year:</strong> {metadata.year}
+              </span>
+            )}
+            {metadata.location && (
+              <span className="px-3 py-1.5 text-xs md:text-sm backdrop-blur-md bg-white/10 rounded-full text-white/90 border border-white/20">
+                <strong>Location:</strong> {metadata.location}
+              </span>
+            )}
+            {metadata.role && (
+              <span className="px-3 py-1.5 text-xs md:text-sm backdrop-blur-md bg-white/10 rounded-full text-white/90 border border-white/20">
+                <strong>Role:</strong> {metadata.role}
+              </span>
+            )}
+          </div>
+        </div>
+      )}
+
       {/* Intro (same style as Caribbean Paradise intro) */}
       <div className="mb-8 md:mb-12">
         <div className="max-w-[720px] mx-auto text-base text-white/90 leading-relaxed">
           <p>
             This project was approached as a commissioned wedding invitation design, built around
-            a siren-inspired theme the bride envisioned: elegant, ocean-rooted, and artful —
+            a siren-inspired theme the bride envisioned: elegant, ocean-rooted, and artful ,
             avoiding cliché while preserving refinement.
           </p>
           <p className="mt-4">
@@ -74,7 +109,7 @@ export default function WeddingInvitationProcessSection() {
           </p>
           <p className="mt-3 text-sm leading-relaxed text-white/85">
             The palette was carefully chosen to align with the event&apos;s
-            visual direction — soft blues and greens that evoke depth, calm, and
+            visual direction , soft blues and greens that evoke depth, calm, and
             fluidity, without overwhelming the composition.
           </p>
           <p className="mt-3 text-sm leading-relaxed text-white/85">
@@ -112,7 +147,7 @@ export default function WeddingInvitationProcessSection() {
             The watercolour was then digitised and developed further in Procreate.
           </p>
           <p className="mt-3 text-sm leading-relaxed text-white/85">
-            Delicate, linear ocean elements were introduced — drawn with
+            Delicate, linear ocean elements were introduced , drawn with
             intentionally thin linework to maintain elegance and restraint.
           </p>
           <p className="mt-3 text-sm leading-relaxed text-white/85">
@@ -151,7 +186,7 @@ export default function WeddingInvitationProcessSection() {
         </div>
 
         <p className="mt-12 text-lg md:text-xl font-light italic text-white/90 leading-relaxed">
-          It highlights my ability to translate emotional direction into visual form —
+          It highlights my ability to translate emotional direction into visual form ,
           creating work that feels intentional, refined, and deeply personal.
         </p>
       </div>

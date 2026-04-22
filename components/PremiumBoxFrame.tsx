@@ -2,7 +2,7 @@
 
 import { useId, useRef, useEffect, useState, type ReactNode } from "react";
 
-/** Matches Tailwind `rounded-2xl` (1rem) — keep in sync with wrapper + inner classes. */
+/** Matches Tailwind `rounded-2xl` (1rem) , keep in sync with wrapper + inner classes. */
 const BOX_RADIUS_PX = 16;
 
 type Props = {

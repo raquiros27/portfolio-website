@@ -42,7 +42,7 @@ function Figure({
   caption: string;
   priority?: boolean;
 }) {
-  const { ref, inView } = useInView<HTMLDivElement>();
+  const { ref } = useInView<HTMLDivElement>();
 
   return (
     <div ref={ref} className="w-full" style={{ position: 'relative', zIndex: 1 }}>
@@ -59,16 +59,6 @@ function Figure({
           position: 'relative',
           zIndex: 1
         }}
-        onError={(e) => {
-          console.error(`❌ Failed to load image: ${src}`);
-          const target = e.target as HTMLImageElement;
-          target.style.border = '3px solid red';
-          target.style.backgroundColor = 'rgba(255,0,0,0.1)';
-          target.alt = `Error loading: ${alt}`;
-        }}
-        onLoad={() => {
-          console.log(`✅ Image loaded successfully: ${src}`);
-        }}
       />
       <div className="text-sm text-white/70 leading-relaxed pl-2">{caption}</div>
     </div>
@@ -77,10 +67,6 @@ function Figure({
 
 export default function HuertosMarinosCaseGallery() {
   const base = "/projects/huertos-marinos";
-
-  useEffect(() => {
-    console.log('🖼️ HuertosMarinosCaseGallery component mounted');
-  }, []);
 
   const items: Item[] = useMemo(
     () => [
@@ -168,8 +154,6 @@ export default function HuertosMarinosCaseGallery() {
   // Layout helpers
   const hero = items.find((i) => i.variant === "hero");
   const rest = items.filter((i) => i !== hero);
-
-  console.log('🖼️ HuertosMarinosCaseGallery rendering with', items.length, 'items');
 
   return (
     <section className="w-full min-h-screen py-16 px-6" style={{ backgroundColor: 'transparent', position: 'relative', zIndex: 1 }}>

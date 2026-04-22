@@ -7,8 +7,8 @@ export const ayaData: CaseStudyProject = {
   location: "Water Company, Costa Rica",
   projectType: "Concept Marketing Campaign · Behavioural Change · Public Awareness",
   images: [
-    { src: "/projects/aya/water-spread.png", alt: "Editorial magazine spread — water awareness campaign" },
-    { src: "/projects/aya/water-billboard.png", alt: "Billboard — water awareness campaign" },
-    { src: "/projects/aya/water-roll-on.png", alt: "Roll-up banner — water awareness campaign" },
+    { src: "/projects/aya/water-spread.png", alt: "Editorial magazine spread , water awareness campaign" },
+    { src: "/projects/aya/water-billboard.png", alt: "Billboard , water awareness campaign" },
+    { src: "/projects/aya/water-roll-on.png", alt: "Roll-up banner , water awareness campaign" },
   ],
 };

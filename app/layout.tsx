@@ -16,7 +16,7 @@ const sans = DM_Sans({
 export const metadata: Metadata = {
   title: "Raquel Quiros Delgado | Portfolio & CV",
   description:
-    "Portfolio and CV of Raquel Quiros Delgado — brand identity, illustration, campaigns, and visual systems.",
+    "Portfolio and CV of Raquel Quiros Delgado , brand identity, illustration, campaigns, and visual systems.",
 };
 
 export default function RootLayout({

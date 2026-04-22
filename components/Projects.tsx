@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { useState } from "react";
 import CaseStudyLayout from "./CaseStudyLayout";
 import type { CaseStudyProject } from "./types";
@@ -52,7 +52,7 @@ const brandIdentityProjects: Project[] = [
     industry: "Food & Beverage / Aquaculture",
     projectType: "Brand Identity, Packaging System, Marketing & Digital Applications",
     role: "Lead Designer & Strategist",
-    tags: ["Brand Identity", "Packaging", "Marketing", "Digital"],
+    tags: ["Brand Identity", "UI/UX", "Marketing", "Social Media"],
     tools: [
       "Adobe Illustrator",
       "Adobe Photoshop",
@@ -75,7 +75,7 @@ const brandIdentityProjects: Project[] = [
       "Full Brand Identity, Visual System, UI Concept, Environmental & Print Design",
     role: "Lead Designer & Strategist (Solo Project)",
     challenge:
-      "Caribbean Paradise had suffered from years of visual inconsistency and brand confusion. Following a change in ownership, the hotel alternated between two names—Caribbean Paradise and Lapa Verde—without establishing a clear identity, making it difficult for travel agencies, tourists, and even locals to recognise or accurately refer to the brand.\n\nThis lack of cohesion weakened brand recognition and positioning within the eco-tourism market, despite the hotel’s exceptional natural setting.",
+      "Caribbean Paradise had suffered from years of visual inconsistency and brand confusion. Following a change in ownership, the hotel alternated between two names, Caribbean Paradise and Lapa Verde, without establishing a clear identity, making it difficult for travel agencies, tourists, and even locals to recognise or accurately refer to the brand.\n\nThis lack of cohesion weakened brand recognition and positioning within the eco-tourism market, despite the hotel’s exceptional natural setting.",
     strategicQuestion:
       "How could a consistent brand identity be created for Caribbean Paradise,  rooted in the cultural and natural richness of Costa Rica's northeastern Caribbean,  to increase recognition and attract international eco-tourism to Tortuguero?",
     approach:
@@ -88,7 +88,7 @@ const brandIdentityProjects: Project[] = [
       "The identity was designed as a complete, living system, not a standalone logo. Deliverables included: A comprehensive brand guidelines book, Environmental signage and wayfinding, Printed and digital communication materials, Custom illustrated labels and amenities, A fully illustrated landscape map to help guests navigate the hotel grounds, A conceptual UI wireframe for the hotel's website, built around original vector illustrations, Hand-painted murals in guest rooms, translating the visual identity into physical space. Each application was developed to maintain consistency, clarity, and emotional resonance,  ensuring the brand experience felt cohesive at every touchpoint.",
     outcome:
       "The result was a strong, recognisable, and culturally grounded brand identity that clearly positioned Caribbean Paradise as an eco-tourism destination with soul. The new identity improved brand recognition, strengthened storytelling for travel agencies and visitors, and transformed the hotel's visual presence into a coherent, memorable experience,  from digital interfaces to the physical environment itself.",
-    tags: ["Brand Identity", "Visual System", "UI Design", "Environmental Design"],
+    tags: ["Brand Identity", "Illustration", "UI Design", "Print"],
     tools: ["Adobe Illustrator", "Adobe InDesign", "Adobe Photoshop", "Procreate"],
     images: ["/projects/caribbean-paradise/cp-brand-guidelines.jpg"],
   },
@@ -102,7 +102,7 @@ const brandIdentityProjects: Project[] = [
     year: "2024",
     projectType: "Community Art Identity, Brand Design, Workshop Platform",
     role: "Founder, Designer & Facilitator",
-    tags: ["Brand Identity", "Community", "Workshops", "Print", "Social"],
+    tags: ["Brand Identity", "Community", "Naming", "Social Media", "Social"],
     tools: ["Adobe Illustrator", "Adobe Photoshop", "Procreate"],
     images: ["/projects/urna/urna-flyer-mockups.jpg"],
   },
@@ -110,7 +110,7 @@ const brandIdentityProjects: Project[] = [
 
 const seasonalIllustrationProjects: Project[] = [
   {
-    title: "Lush Seasonal Pattern Design",
+    title: "LUSH Seasonal Pattern Design",
     subtitle: "Halloween & Christmas 2026,  Talent Pool Selection",
     description:
       "Illustrated seasonal pattern systems developed for Lush's gift designs, combining handcrafted techniques, storytelling, and scalable production thinking.",
@@ -119,7 +119,7 @@ const seasonalIllustrationProjects: Project[] = [
     year: "2026",
     projectType: "Digital and Traditional Illustration Designs",
     role: "Illustrator & Pattern Designer",
-    tags: ["Illustration", "Pattern Design", "Gift Wrap", "Halloween", "Christmas"],
+    tags: ["Vector Illustration", "Pattern Design", "Packaging", "Gouache", "Christmas"],
     tools: ["Adobe Illustrator", "Adobe Photoshop", "Procreate", "Gouache", "After Effects"],
     images: ["/projects/lush/lush-wrappingpaper-christmas-mockup.png"],
   },
@@ -127,7 +127,7 @@ const seasonalIllustrationProjects: Project[] = [
     title: "Wedding Invitation",
     subtitle: "Bespoke Watercolour & Illustration Invitation Design",
     description:
-      "An invitation designed as both artwork and announcement — translating atmosphere, emotion, and story into a physical object.",
+      "An invitation designed as both artwork and announcement, translating atmosphere, emotion, and story into a physical object.",
     category: "Digital and Traditional Illustration Designs",
     year: "2025",
     projectType: "Illustration & Print, Invitation Design",
@@ -141,7 +141,7 @@ const seasonalIllustrationProjects: Project[] = [
 const campaignDesignProjects: Project[] = [
   {
     title: "AyA",
-    subtitle: "Think of Others — COVID-19 Water Awareness Campaign",
+    subtitle: "Think of Others, COVID-19 Water Awareness Campaign",
     description:
       "A behavioural awareness campaign designed to turn water waste into something visible. Concept project for water company, Costa Rica.",
     category: "Campaign Design",
@@ -185,7 +185,7 @@ function caseStudyForSlug(slug: string): CaseStudyProject | null {
   return null;
 }
 
-/** Matches Experience key-skills icons — stroke SVGs tinted via brightness-0 on light backgrounds. */
+/** Matches Experience key-skills icons, stroke SVGs tinted via brightness-0 on light backgrounds. */
 function categoryStripIcon(category: string): string {
   if (category === "Brand Identity") return "/icons/brand.svg";
   if (category === "Digital and Traditional Illustration Designs") return "/icons/creative.svg";
@@ -198,6 +198,7 @@ export default function Projects() {
   const [selectedCaseStudy, setSelectedCaseStudy] = useState<CaseStudyProject | null>(
     null
   );
+  const shouldReduceMotion = useReducedMotion();
 
   return (
     <>
@@ -218,8 +219,7 @@ export default function Projects() {
             </h2>
             <SectionAccentLine centered />
             <p className="mt-5 text-lg leading-relaxed text-inkMuted">
-              Each piece below opens a detailed view — case studies load the full project
-              story; others open a preview with imagery and narrative.
+              Click on a project to learn more.
             </p>
           </div>
 
@@ -232,112 +232,124 @@ export default function Projects() {
               const categoryWord = project.category.split(/\s/)[0];
 
               return (
-                <PremiumBoxFrame
+                <motion.div
                   key={slug}
+                  whileHover={shouldReduceMotion ? undefined : { y: -4, scale: 1.006 }}
+                  whileTap={shouldReduceMotion ? undefined : { scale: 0.995 }}
                   className="h-full"
-                  innerClassName="group flex h-full cursor-pointer flex-col overflow-hidden border border-ink/10 bg-paper shadow-sm transition-shadow hover:shadow-md"
                 >
-                  <button
-                    type="button"
-                    className="flex h-full w-full flex-col text-left"
-                    onClick={() => {
-                      if (caseStudy) setSelectedCaseStudy(caseStudy);
-                      else setSelectedProject(project);
-                    }}
+                  <PremiumBoxFrame
+                    className="h-full"
+                    innerClassName="group flex h-full cursor-pointer flex-col overflow-hidden border border-ink/10 bg-paper shadow-sm transition-all duration-300 hover:shadow-lg hover:shadow-ink/10"
                   >
-                    <div className="flex shrink-0 items-center gap-2 border-b border-ink/10 bg-paper/90 px-4 py-2 text-xs font-medium uppercase tracking-wider text-inkFaint backdrop-blur-sm">
-                      <img
-                        src={categoryStripIcon(project.category)}
-                        alt=""
-                        width={14}
-                        height={14}
-                        className="h-3.5 w-3.5 shrink-0 brightness-0 opacity-[0.55]"
-                        aria-hidden
-                      />
-                      <span>{project.category}</span>
-                    </div>
-                    <div
-                      className={
-                        slug === "aya"
-                          ? "relative aspect-[16/10] min-h-0 w-full overflow-hidden bg-[linear-gradient(90deg,#cacbcb_0%,#d1d3d2_100%)]"
-                          : `relative aspect-[16/10] min-h-0 w-full overflow-hidden bg-gradient-to-br ${gradient}`
-                      }
+                    <button
+                      type="button"
+                      className="flex h-full w-full flex-col text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta/70 focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
+                      onClick={() => {
+                        if (caseStudy) setSelectedCaseStudy(caseStudy);
+                        else setSelectedProject(project);
+                      }}
                     >
-                      {hero ? (
-                        slug === "aya" ? (
-                          <img
-                            src={hero}
-                            alt=""
-                            className="absolute inset-0 h-full w-full object-contain object-center transition-transform duration-500 group-hover:scale-[1.02]"
-                          />
-                        ) : (
-                          <img
-                            src={hero}
-                            alt=""
-                            className={`absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02] ${project.previewImageObjectPosition ?? ""} ${slug === "caribbean-paradise" ? "brightness-[1.07] contrast-[1.03]" : ""}`}
-                          />
-                        )
-                      ) : (
-                        <div className="absolute inset-0 flex items-center justify-center p-8">
-                          <span className="font-display text-[clamp(2rem,5vw,3.25rem)] font-medium text-ink/10 transition-colors group-hover:text-ink/15">
-                            {categoryWord}
-                          </span>
-                        </div>
-                      )}
-                    </div>
-                    <div className="p-8">
-                      <h3 className="font-display text-2xl font-semibold text-ink">
-                        {project.title}
-                      </h3>
-                      <p className="mt-3 leading-relaxed text-inkMuted">
-                        {project.description}
-                      </p>
-                      <div className="mt-6 flex flex-wrap gap-2">
-                        {project.tags.slice(0, 4).map((tag) => (
-                          <span
-                            key={tag}
-                            className="rounded-full bg-creamDeep px-3 py-1 text-xs font-medium text-inkMuted"
-                          >
-                            {tag}
-                          </span>
-                        ))}
+                      <div className="flex shrink-0 items-center gap-2 border-b border-ink/10 bg-paper/90 px-4 py-2 text-xs font-medium uppercase tracking-wider text-inkFaint backdrop-blur-sm">
+                        <img
+                          src={categoryStripIcon(project.category)}
+                          alt=""
+                          width={14}
+                          height={14}
+                          className="h-3.5 w-3.5 shrink-0 brightness-0 opacity-[0.55]"
+                          aria-hidden
+                        />
+                        <span>{project.category}</span>
                       </div>
-                      <p className="mt-6 text-sm font-medium text-terracottaDeep">
-                        {caseStudy ? "View case study →" : "View project →"}
-                      </p>
-                    </div>
-                  </button>
-                </PremiumBoxFrame>
+                      <div
+                        className={
+                          slug === "aya"
+                            ? "relative aspect-[16/10] min-h-0 w-full overflow-hidden bg-[linear-gradient(90deg,#cacbcb_0%,#d1d3d2_100%)]"
+                            : `relative aspect-[16/10] min-h-0 w-full overflow-hidden bg-gradient-to-br ${gradient}`
+                        }
+                      >
+                        {hero ? (
+                          slug === "aya" ? (
+                            <img
+                              src={hero}
+                              alt={`${project.title} preview`}
+                              className="absolute inset-0 h-full w-full object-contain object-center transition-transform duration-500 group-hover:scale-[1.02]"
+                            />
+                          ) : (
+                            <img
+                              src={hero}
+                              alt={`${project.title} preview`}
+                              className={`absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02] ${project.previewImageObjectPosition ?? ""} ${slug === "caribbean-paradise" ? "brightness-[1.07] contrast-[1.03]" : ""}`}
+                            />
+                          )
+                        ) : (
+                          <div className="absolute inset-0 flex items-center justify-center p-8">
+                            <span className="font-display text-[clamp(2rem,5vw,3.25rem)] font-medium text-ink/10 transition-colors group-hover:text-ink/15">
+                              {categoryWord}
+                            </span>
+                          </div>
+                        )}
+                      </div>
+                      <div className="p-8">
+                        <h3 className="font-display text-2xl font-semibold text-ink">
+                          {project.title}
+                        </h3>
+                        <p className="mt-3 leading-relaxed text-inkMuted">
+                          {project.description}
+                        </p>
+                        <div className="mt-6 flex flex-wrap gap-2">
+                          {project.tags.slice(0, 4).map((tag, tagIdx) => (
+                            <span
+                              key={tag}
+                              className="rounded-full bg-creamDeep px-3 py-1 text-xs font-medium text-inkMuted transition-all duration-300 group-hover:-translate-y-0.5 group-hover:bg-cream group-hover:text-ink"
+                              style={{ transitionDelay: `${tagIdx * 35}ms` }}
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                        <p className="mt-6 text-sm font-medium text-terracottaDeep transition-transform duration-300 group-hover:translate-x-0.5">
+                          {caseStudy ? "View case study →" : "View project →"}
+                        </p>
+                      </div>
+                    </button>
+                  </PremiumBoxFrame>
+                </motion.div>
               );
             })}
           </div>
         </div>
       </section>
 
-      {/* Simple project modal — frosted cream glass */}
+      {/* Simple project modal, frosted cream glass */}
       <AnimatePresence>
         {selectedProject && (
           <>
             <motion.div
-              initial={{ opacity: 0 }}
+              initial={shouldReduceMotion ? false : { opacity: 0 }}
               animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+              exit={shouldReduceMotion ? undefined : { opacity: 0 }}
               className="fixed inset-0 z-[100] bg-ink/25 backdrop-blur-md"
               onClick={() => setSelectedProject(null)}
             />
 
             <motion.div
-              initial={{ opacity: 0, scale: 0.96 }}
+              initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.96 }}
+              exit={shouldReduceMotion ? undefined : { opacity: 0, scale: 0.96 }}
               className="fixed inset-4 z-[101] flex max-h-[calc(100vh-2rem)] flex-col overflow-hidden rounded-2xl border border-white/55 bg-paper/50 shadow-[0_24px_80px_rgba(43,37,32,0.1)] ring-1 ring-ink/10 backdrop-blur-2xl backdrop-saturate-150 md:inset-8"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="relative flex-shrink-0 border-b border-ink/10 bg-creamDeep/80 px-6 py-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.45)] backdrop-blur-xl md:px-8 md:py-6">
+              <motion.div
+                initial={shouldReduceMotion ? false : { opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.28, delay: shouldReduceMotion ? 0 : 0.06 }}
+                className="relative flex-shrink-0 border-b border-ink/10 bg-creamDeep/80 px-6 py-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.45)] backdrop-blur-xl md:px-8 md:py-6"
+              >
                 <button
                   type="button"
                   onClick={() => setSelectedProject(null)}
-                  className="absolute right-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full text-xl font-light leading-none text-ink/80 transition-colors hover:bg-paper/60 hover:text-ink md:right-5"
+                  className="absolute right-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full text-xl font-light leading-none text-ink/80 transition-colors hover:bg-paper/60 hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta/70 focus-visible:ring-offset-2 focus-visible:ring-offset-creamDeep md:right-5"
                   aria-label="Close"
                 >
                   ×
@@ -347,9 +359,14 @@ export default function Projects() {
                     {selectedProject.title}
                   </h2>
                 </div>
-              </div>
+              </motion.div>
 
-              <div className="min-h-0 flex-1 overflow-y-auto">
+              <motion.div
+                initial={shouldReduceMotion ? false : { opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.32, delay: shouldReduceMotion ? 0 : 0.12 }}
+                className="min-h-0 flex-1 overflow-y-auto [overflow-y:overlay]"
+              >
                 {(selectedProject.subtitle ||
                   selectedProject.location ||
                   selectedProject.year ||
@@ -498,36 +515,41 @@ export default function Projects() {
                     )}
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </motion.div>
           </>
         )}
       </AnimatePresence>
 
-      {/* Case study modal — frosted cream glass; body uses data-modal-cream-glass for ink-on-cream overrides */}
+      {/* Case study modal, frosted cream glass; body uses data-modal-cream-glass for ink-on-cream overrides */}
       <AnimatePresence>
         {selectedCaseStudy && (
           <>
             <motion.div
-              initial={{ opacity: 0 }}
+              initial={shouldReduceMotion ? false : { opacity: 0 }}
               animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+              exit={shouldReduceMotion ? undefined : { opacity: 0 }}
               className="fixed inset-0 z-[100] bg-ink/25 backdrop-blur-md"
               onClick={() => setSelectedCaseStudy(null)}
             />
 
             <motion.div
-              initial={{ opacity: 0, scale: 0.97 }}
+              initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.97 }}
               animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.97 }}
+              exit={shouldReduceMotion ? undefined : { opacity: 0, scale: 0.97 }}
               className="fixed inset-4 z-[101] flex max-h-[calc(100vh-2rem)] flex-col overflow-hidden rounded-2xl border border-white/60 bg-cream/45 shadow-[0_24px_80px_rgba(43,37,32,0.1)] ring-1 ring-ink/10 backdrop-blur-2xl backdrop-saturate-150 md:inset-8"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="relative flex-shrink-0 border-b border-ink/10 bg-creamDeep/80 px-6 py-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.45)] backdrop-blur-xl md:px-8 md:py-6">
+              <motion.div
+                initial={shouldReduceMotion ? false : { opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.28, delay: shouldReduceMotion ? 0 : 0.06 }}
+                className="relative flex-shrink-0 border-b border-ink/10 bg-creamDeep/80 px-6 py-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.45)] backdrop-blur-xl md:px-8 md:py-6"
+              >
                 <button
                   type="button"
                   onClick={() => setSelectedCaseStudy(null)}
-                  className="absolute right-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full text-xl font-light leading-none text-ink/80 transition-colors hover:bg-paper/60 hover:text-ink md:right-5"
+                  className="absolute right-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full text-xl font-light leading-none text-ink/80 transition-colors hover:bg-paper/60 hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta/70 focus-visible:ring-offset-2 focus-visible:ring-offset-creamDeep md:right-5"
                   aria-label="Close"
                 >
                   ×
@@ -537,12 +559,18 @@ export default function Projects() {
                     {selectedCaseStudy.title}
                   </h2>
                 </div>
-              </div>
-              <div className="min-h-0 flex-1 overflow-y-auto" data-modal-cream-glass="true">
-                <div className={selectedCaseStudy.title === "URNArtist" ? "p-0" : "p-4 md:p-6"}>
+              </motion.div>
+              <motion.div
+                initial={shouldReduceMotion ? false : { opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.32, delay: shouldReduceMotion ? 0 : 0.12 }}
+                className="min-h-0 flex-1 overflow-y-auto [overflow-y:overlay]"
+                data-modal-cream-glass="true"
+              >
+                <div className="p-0">
                   <CaseStudyLayout project={selectedCaseStudy} />
                 </div>
-              </div>
+              </motion.div>
             </motion.div>
           </>
         )}

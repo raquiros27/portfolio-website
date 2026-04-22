@@ -43,7 +43,7 @@ export default function About() {
             <div className="mt-10 border-t border-ink/10 pt-10 md:mt-12 md:pt-12">
               <p className="text-[0.975rem] leading-[1.8] text-inkMuted text-pretty md:text-[1.0625rem] md:leading-[1.85]">
                 With a background in Graphic Design and Fine Arts, I approach each project
-                holistically—shaping brand identities, visual systems, and campaigns that are both
+                holistically, shaping brand identities, visual systems, and campaigns that are both
                 thoughtful and effective. From concept to execution, I focus on clarity, cohesion,
                 and meaning, ensuring every element serves a purpose and contributes to a stronger,
                 more memorable brand.
@@ -51,7 +51,7 @@ export default function About() {
 
               <div className="mt-7 border-t border-ink/10 pt-7 md:mt-8 md:pt-8">
                 <p className="text-lg font-semibold leading-relaxed text-ink text-pretty md:text-xl">
-                  I&apos;m especially drawn to projects where strategy and creativity meet—where brands
+                  I&apos;m especially drawn to projects where strategy and creativity meet, where brands
                   are not only seen, but felt.
                 </p>
               </div>

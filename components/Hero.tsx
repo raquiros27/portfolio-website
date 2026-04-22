@@ -116,23 +116,19 @@ export default function Hero() {
         </div>
 
         <p className="mx-auto mt-7 max-w-xl text-center text-lg leading-relaxed text-inkMuted md:mt-8 md:text-xl">
-          Brand identity, illustration, and marketing strategy — designed with intention for teams who value clarity, warmth, and intentional visuals.
-        </p>
-
-        <p className="mt-4 text-center text-sm text-inkFaint">
-          Based in Leeds, UK · From Costa Rica
+          Brand identity, illustration, and marketing strategy, designed with intention for teams who value clarity, warmth, and intentional visuals.
         </p>
 
         <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-5 md:mt-11">
           <a
             href="#work"
-            className="inline-flex items-center justify-center rounded-full bg-ink px-10 py-3.5 text-sm font-medium text-paper shadow-sm transition-transform hover:bg-terracottaDeep active:scale-[0.98] hover:scale-[1.02]"
+            className="inline-flex items-center justify-center rounded-full bg-ink px-10 py-3.5 text-sm font-medium text-paper shadow-sm transition-transform hover:bg-terracottaDeep active:scale-[0.98] hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta/80 focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
           >
             View selected work
           </a>
           <a
             href="#contact"
-            className="inline-flex items-center justify-center rounded-full border border-ink/15 bg-paper/60 px-10 py-3.5 text-sm font-medium text-ink backdrop-blur-sm transition-colors hover:border-terracotta/40 hover:text-terracottaDeep active:scale-[0.98] hover:scale-[1.02]"
+            className="inline-flex items-center justify-center rounded-full border border-ink/15 bg-paper/60 px-10 py-3.5 text-sm font-medium text-ink backdrop-blur-sm transition-colors hover:border-terracotta/40 hover:text-terracottaDeep active:scale-[0.98] hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta/80 focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
           >
             Get in touch
           </a>

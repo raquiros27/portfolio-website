@@ -73,14 +73,17 @@ function Figure({
 function SnapshotRow({ items }: { items: { label: string; value: string }[] }) {
   return (
     <div
-      className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 p-4 rounded-2xl backdrop-blur-md bg-white/10 border border-white/20"
+      className="flex flex-wrap justify-center gap-3 items-center"
       role="list"
     >
       {items.map((it) => (
-        <div key={it.label} className="m-0" role="listitem">
-          <div className="text-[11px] uppercase tracking-widest text-white/70 mb-1">{it.label}</div>
-          <div className="text-[13px] leading-snug text-white/90">{it.value}</div>
-        </div>
+        <span
+          key={it.label}
+          role="listitem"
+          className="px-3 py-1.5 text-xs md:text-sm backdrop-blur-md bg-white/10 rounded-full text-white/90 border border-white/20"
+        >
+          <strong>{it.label}:</strong> {it.value}
+        </span>
       ))}
     </div>
   );
@@ -93,17 +96,19 @@ export default function UrnaLayout({ project }: UrnaLayoutProps) {
     <main className="relative w-full" style={{ backgroundColor: "transparent" }}>
       {/* HERO */}
       <section className="w-full mb-8 md:mb-12">
-        <div className="w-full">
-          <Figure
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.7 }}
+          className="relative w-full h-[38vh] md:h-[56vh] overflow-hidden"
+        >
+          <img
             src={`${base}/urna-hero.png`}
             alt="URNArtist hero banner"
-            caption=""
-            maxWidth={undefined}
-            priority
-            imgClassName="w-full h-auto block rounded-none border-0"
-            imgStyle={undefined}
+            className="absolute inset-0 w-full h-full object-cover object-center rounded-none border-0"
+            loading="eager"
           />
-        </div>
+        </motion.div>
       </section>
 
       {/* TITLE & SNAPSHOT */}
@@ -124,7 +129,6 @@ export default function UrnaLayout({ project }: UrnaLayoutProps) {
           <SnapshotRow
             items={[
               { label: "Audience", value: "Kids · Women's workshops (future-ready)" },
-              { label: "Focus", value: "Brand identity · Flyers · Social media · Merch" },
               { label: "Tone", value: "Warm · playful · calm · trustworthy" },
               { label: "Goal", value: "Belonging, expression, and community visibility" },
             ]}
@@ -132,7 +136,7 @@ export default function UrnaLayout({ project }: UrnaLayoutProps) {
         </motion.div>
       </section>
 
-      {/* Intro (same style as Caribbean Paradise) */}
+      {/* Intro (same style as Caribbean Paradise intro) */}
       <section className="container mx-auto px-6 mb-12 md:mb-16">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -142,13 +146,17 @@ export default function UrnaLayout({ project }: UrnaLayoutProps) {
           className="max-w-[720px] mx-auto text-base text-white/90 leading-relaxed"
         >
           <p>
-            <strong className="text-white">You Are An Artist.</strong> A brand designed to make creativity feel
-            accessible, comforting, and real, for kids today, and community workshops as it grows.
+            URNArtist, &quot;You Are An Artist&quot; began as my personal initiative to create a
+            safe creative space for children and community workshops.
+          </p>
+          <p className="mt-4">
+            A space to show kids different art mediums (acrylics, watercolour, ink, and mixed
+            media) to teach them grounding and self-expression.
           </p>
         </motion.div>
       </section>
 
-      {/* BRAND FOUNDATION (card) — between Snapshot and Logo */}
+      {/* BRAND FOUNDATION (card) , between Snapshot and Logo */}
       <section className="container mx-auto px-6 mb-12 md:mb-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -163,10 +171,6 @@ export default function UrnaLayout({ project }: UrnaLayoutProps) {
                 Brand Foundation
               </h2>
               <p className="text-base text-white/90 leading-relaxed mb-4">
-                <strong className="text-white">URNArtist,  &quot;You Are An Artist&quot;</strong> began as my personal initiative to
-                create a safe creative space for children and community workshops.
-              </p>
-              <p className="text-base text-white/90 leading-relaxed mb-4">
                 The name carries the philosophy behind the project:{" "}
                 <strong className="text-white">
                   a reminder that creativity is not a skill reserved for a few,  it is something we all carry.
@@ -175,9 +179,6 @@ export default function UrnaLayout({ project }: UrnaLayoutProps) {
               <p className="text-base text-white/90 leading-relaxed mb-4">
                 The name is both an affirmation and a positioning statement. It removes hierarchy from art. It removes
                 intimidation. It invites participation.
-              </p>
-              <p className="text-base text-white/90 leading-relaxed mb-4">
-                From the beginning, the brand was built intentionally,  not just visually, but conceptually.
               </p>
               <p className="text-base text-white/90 leading-relaxed">
                 This was not just an art class,  it was a carefully designed creative environment.
@@ -211,7 +212,7 @@ export default function UrnaLayout({ project }: UrnaLayoutProps) {
             </h2>
             <p className="text-base text-white/90 leading-relaxed mb-4">
               Developed to create a sense of psychological comfort, the colour palette balances softness and warmth
-              without feeling infantilising—calm enough for reflective workshops, playful enough to invite exploration,
+              without feeling infantilising, calm enough for reflective workshops, playful enough to invite exploration,
               and consistent across print, digital, and physical touchpoints, while remaining refined and approachable
               for adults.
             </p>
@@ -262,7 +263,7 @@ export default function UrnaLayout({ project }: UrnaLayoutProps) {
               Community as Marketing Strategy
             </h2>
             <p className="text-base text-white/90 leading-relaxed">
-              URNArtist doesn’t rely on aggressive advertising—it grows through community visibility. Content focuses on
+              URNArtist doesn’t rely on aggressive advertising, it grows through community visibility. Content focuses on
               atmosphere, process, and real creative moments, creating space for exploration. Rather than selling art,
               the brand builds a sense of belonging.
             </p>
@@ -289,7 +290,7 @@ export default function UrnaLayout({ project }: UrnaLayoutProps) {
             </h2>
             <p className="text-base text-white/90 leading-relaxed">
               Extending the identity into physical touchpoints strengthens recognition, memorability, and emotional
-              connection—carrying the experience beyond the studio.
+              connection, carrying the experience beyond the studio.
             </p>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
