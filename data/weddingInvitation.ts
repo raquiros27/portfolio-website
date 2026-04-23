@@ -12,6 +12,6 @@ export const weddingInvitationData: CaseStudyProject = {
   images: [
     { src: "/projects/invitation/invite-part1.png", alt: "Hand-painted watercolour base", caption: "Hand-painted watercolour base establishing palette and tone.", priority: true },
     { src: "/projects/invitation/invite-part2.png", alt: "Digitised watercolour with ocean linework", caption: "Digitised and refined in Procreate with layered transparencies." },
-    { src: "/projects/invitation/invitation-mock-up.png", alt: "Invitation print mock-up", caption: "Final invitation , print mock-up." },
+    { src: "/projects/invitation/invite-part3-optimized.jpg", alt: "Final invitation print mock-up", caption: "Final invitation, print mock-up." },
   ],
 };

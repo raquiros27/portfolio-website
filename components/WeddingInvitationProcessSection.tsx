@@ -1,7 +1,7 @@
 "use client";
 
 // Wedding Invitation, Process strip + narrative
-// Files: public/projects/invitation/invite-part1.png, invite-part2.png, invitation-mock-up.png (lowercase)
+// Files: public/projects/invitation/invite-part1.png, invite-part2.png, invite-part3-optimized.jpg
 
 type MediaItem = {
   src: string;
@@ -31,7 +31,7 @@ const weddingInviteMedia: MediaItem[] = [
   },
   {
     src: `/projects/${slug}/invite-part3-optimized.jpg`,
-    alt: "Invite-part3.png",
+    alt: "Final invitation print mock-up",
     caption:
       "03, Final invitation: print mock-up showing the finished piece in context.",
   },
