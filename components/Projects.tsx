@@ -134,7 +134,7 @@ const seasonalIllustrationProjects: Project[] = [
     role: "Illustrator & Designer",
     tags: ["Illustration", "Watercolour", "Invitation", "Print"],
     tools: ["Procreate", "Adobe Illustrator", "Watercolour"],
-    images: ["/projects/invitation/invite-part3-optimized.jpg"],
+    images: ["/projects/invitation/invitation-mock-up.png"],
   },
 ];
 

@@ -14,7 +14,7 @@ export default function WeddingInvitationLayout({ project }: WeddingInvitationLa
       <section className="w-full mb-8 md:mb-12">
         <div className="relative w-full h-[38vh] md:h-[46vh] overflow-hidden">
           <img
-            src="/projects/invitation/invite-part3-optimized.jpg"
+            src="/projects/invitation/invitation-mock-up.png"
             alt="Wedding invitation print mock-up"
             className="absolute inset-0 w-full h-full object-cover object-center rounded-none border-0"
             loading="eager"

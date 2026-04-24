@@ -7,6 +7,7 @@ type MediaItem = {
   src: string;
   alt: string;
   caption?: string;
+  fallbackSrc?: string;
 };
 type WeddingMetadata = {
   year?: string;
@@ -31,6 +32,7 @@ const weddingInviteMedia: MediaItem[] = [
   },
   {
     src: `/projects/${slug}/invite-part3-optimized.jpg`,
+    fallbackSrc: `/projects/${slug}/invite-part3.png`,
     alt: "Final invitation print mock-up",
     caption:
       "03, Final invitation: print mock-up showing the finished piece in context.",
@@ -128,6 +130,12 @@ export default function WeddingInvitationProcessSection({ metadata }: { metadata
                   alt={item.alt}
                   className="h-auto w-full object-contain"
                   loading="lazy"
+                  onError={(event) => {
+                    if (!item.fallbackSrc) return;
+                    const img = event.currentTarget;
+                    if (img.src.endsWith(item.fallbackSrc)) return;
+                    img.src = item.fallbackSrc;
+                  }}
                 />
               </div>
               {item.caption && (
