@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import RqdLogo from "@/components/RqdLogo";
 
 const NAV_ITEMS = [
   { name: "Work", href: "#work" },
@@ -93,9 +94,9 @@ export default function Header() {
         <div className="flex items-center justify-between">
           <a
             href="#home"
-            className="font-display text-xl font-semibold tracking-tight text-ink transition-transform hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta/70 focus-visible:ring-offset-2 focus-visible:ring-offset-paper md:text-2xl"
+            className="rounded-md transition-transform hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta/70 focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
           >
-            RQD
+            <RqdLogo color="#915745" className="h-12 w-12 md:h-[4.75rem] md:w-[4.75rem]" />
           </a>
 
           <div ref={navRailRef} className="relative hidden items-center gap-10 md:flex">

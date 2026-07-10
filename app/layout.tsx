@@ -17,6 +17,10 @@ export const metadata: Metadata = {
   title: "Raquel Quiros Delgado | Portfolio & CV",
   description:
     "Portfolio and CV of Raquel Quiros Delgado , brand identity, illustration, campaigns, and visual systems.",
+  icons: {
+    icon: "/logo-rqd.svg",
+    apple: "/logo-rqd.svg",
+  },
 };
 
 export default function RootLayout({

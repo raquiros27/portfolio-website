@@ -16,6 +16,7 @@ const config: Config = {
         inkFaint: "#8A8178",
         terracotta: "#B86B52",
         terracottaDeep: "#9A5340",
+        brand: "#915745",
         sage: "#7D8B72",
         sand: "#D4C4B0",
         paper: "#FDFBF7",
